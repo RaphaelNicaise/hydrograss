@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Hydrograss | The Earth Architect</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;600;700;800&amp;family=Work+Sans:wght@300;400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-primary-fixed-variant": "#2b4f2c",
+            "on-surface-variant": "#424840",
+            "inverse-on-surface": "#f3f0eb",
+            "on-secondary": "#ffffff",
+            "tertiary-fixed": "#ebe4b1",
+            "on-background": "#1c1c19",
+            "surface-container": "#f0ede9",
+            "inverse-primary": "#a8d1a4",
+            "on-primary": "#ffffff",
+            "surface": "#fcf9f4",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-container": "#b2ac7d",
+            "primary-fixed": "#c4edbf",
+            "inverse-surface": "#31302d",
+            "on-tertiary": "#ffffff",
+            "outline-variant": "#c2c8bd",
+            "surface-dim": "#dcdad5",
+            "surface-tint": "#436742",
+            "on-secondary-container": "#795a1e",
+            "surface-container-high": "#eae8e3",
+            "error-container": "#ffdad6",
+            "on-secondary-fixed-variant": "#5e4206",
+            "on-secondary-fixed": "#271900",
+            "surface-bright": "#fcf9f4",
+            "secondary-container": "#fed48c",
+            "secondary": "#b89352",
+            "on-tertiary-container": "#44401b",
+            "secondary-fixed-dim": "#e9c07b",
+            "on-surface": "#1c1c19",
+            "background": "#fcf9f4",
+            "on-tertiary-fixed": "#1f1c00",
+            "on-primary-container": "#91b98e",
+            "error": "#ba1a1a",
+            "primary": "#103314",
+            "secondary-fixed": "#ffdea9",
+            "surface-container-low": "#f6f3ee",
+            "primary-fixed-dim": "#a8d1a4",
+            "on-tertiary-fixed-variant": "#4c4822",
+            "surface-container-highest": "#e5e2dd",
+            "outline": "#72796f",
+            "tertiary-fixed-dim": "#cec897",
+            "primary-container": "#274a28",
+            "on-error-container": "#93000a",
+            "tertiary": "#646037",
+            "on-error": "#ffffff",
+            "on-primary-fixed": "#002105",
+            "surface-variant": "#e5e2dd"
+          },
+          fontFamily: {
+            "headline": ["Manrope", "sans-serif"],
+            "body": ["Work Sans", "sans-serif"],
+            "label": ["Work Sans", "sans-serif"]
+          },
+          borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+        },
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .worker-watermark {
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+      opacity: 0.03;
+    }
+
+    .nav-link {
+      position: relative;
+      padding-bottom: 4px;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #d4a84b;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+    .nav-link.active {
+      color: #d4a84b !important;
+    }
+
+    /* Carousel */
+    .varieties-track {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Mobile menu */
+    #mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    #mobile-menu.open {
+      max-height: 400px;
+    }
+
+    /* Video placeholder pulse */
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .video-placeholder {
+      background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 2s infinite;
+    }
+  </style>
+</head>
+
+<body class="bg-surface font-body text-on-surface selection:bg-secondary/30">
+  <!-- TopNavBar -->
+  <header id="main-header" class="fixed top-0 w-full z-50 bg-[#1a3a0e] shadow-lg transition-all duration-300">
+    <nav class="flex justify-between items-center w-full px-4 sm:px-6 py-3 max-w-7xl mx-auto">
+      <!-- Logo -->
+      <a href="#inicio" class="flex items-center gap-2 shrink-0">
+        <img src="public/36 (1)-Photoroom.png" alt="Hydrograss Logo" class="h-10 sm:h-12 w-auto" />
+      </a>
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center space-x-6 lg:space-x-8 font-headline font-bold tracking-tight text-sm lg:text-base">
+        <a class="nav-link text-[#f0ead2] hover:text-[#d4a84b] transition-colors active" href="#inicio" data-section="inicio">Inicio</a>
+        <a class="nav-link text-[#f0ead2] hover:text-[#d4a84b] transition-colors" href="#resultados" data-section="resultados">Resultados</a>
+        <a class="nav-link text-[#f0ead2] hover:text-[#d4a84b] transition-colors" href="#variedades" data-section="variedades">Variedades</a>
+        <a class="nav-link text-[#f0ead2] hover:text-[#d4a84b] transition-colors" href="#faq" data-section="faq">FAQ</a>
+        <a class="nav-link text-[#f0ead2] hover:text-[#d4a84b] transition-colors" href="#contacto" data-section="contacto">Contacto</a>
+      </div>
+      <!-- CTA + Hamburger -->
+      <div class="flex items-center gap-3">
+        <a href="https://wa.me/5492915060219?text=Hola%2C%20quiero%20consultar%20sobre%20hidrosiembra"
+          class="hidden sm:inline-flex bg-[#d4a84b] text-[#1a3a0e] px-5 py-2 rounded-lg font-headline font-bold hover:bg-[#c49a3d] active:scale-95 transition-all text-sm">
+          Consultar
+        </a>
+        <!-- Hamburger button -->
+        <button id="hamburger-btn" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Menú">
+          <span class="block w-6 h-0.5 bg-[#f0ead2] transition-all" id="ham-1"></span>
+          <span class="block w-6 h-0.5 bg-[#f0ead2] transition-all" id="ham-2"></span>
+          <span class="block w-6 h-0.5 bg-[#f0ead2] transition-all" id="ham-3"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden bg-[#1a3a0e] border-t border-white/10">
+      <div class="flex flex-col px-6 py-4 space-y-4 font-headline font-bold">
+        <a class="nav-link-mobile text-[#f0ead2] hover:text-[#d4a84b] transition-colors py-2" href="#inicio" data-section="inicio">Inicio</a>
+        <a class="nav-link-mobile text-[#f0ead2] hover:text-[#d4a84b] transition-colors py-2" href="#resultados" data-section="resultados">Resultados</a>
+        <a class="nav-link-mobile text-[#f0ead2] hover:text-[#d4a84b] transition-colors py-2" href="#variedades" data-section="variedades">Variedades</a>
+        <a class="nav-link-mobile text-[#f0ead2] hover:text-[#d4a84b] transition-colors py-2" href="#faq" data-section="faq">FAQ</a>
+        <a class="nav-link-mobile text-[#f0ead2] hover:text-[#d4a84b] transition-colors py-2" href="#contacto" data-section="contacto">Contacto</a>
+        <a href="https://wa.me/5492915060219?text=Hola%2C%20quiero%20consultar%20sobre%20hidrosiembra"
+          class="bg-[#d4a84b] text-[#1a3a0e] px-5 py-3 rounded-lg font-headline font-bold text-center hover:bg-[#c49a3d] transition-all">
+          Consultar por WhatsApp
+        </a>
+      </div>
+    </div>
+  </header>
+  <!-- Hero Section -->
+  <section class="relative min-h-[80vh] flex items-center overflow-hidden pt-20" id="inicio">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary to-primary-container z-0"></div>
+    <img alt="Background" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-40 grayscale"
+      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxvPoxNpqQj_7Pj3JoWGGk9YXFb0iIYkoKBK0NJcSwjmSEysEQwOtOTE6otNFuMlTNncjqlZ-ckbhjs6zRZPXtUu5rL1h3aNfJ9U8ufF82ITVARWxq41w-TJqayBUgjZIOfG3d6wgwMh70OI36HXH2ctaN3Wq6rosK2ty_XAvOyTsypUeAHTpaK-_5ZZpCZzyFcWKuV_eOouNI0JSPr3TsKKne3BGYl7dGOEfU-ZM3gv8rDSpR2WF2khDu-HFctWggvorBxRTtalJa" />
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 py-12 md:py-16">
+      <div class="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <!-- Left: Text -->
+        <div class="text-white space-y-6">
+          <div class="inline-block px-4 py-1 border border-secondary/40 rounded-full bg-secondary/10">
+            <span class="text-secondary font-label text-xs uppercase tracking-[0.2em] font-semibold">The Earth Architect</span>
+          </div>
+          <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-headline font-extrabold leading-tight tracking-tighter">
+            La forma más rápida y eficiente de tener tu césped perfecto.
+          </h1>
+          <p class="text-lg sm:text-xl text-white/80 max-w-xl leading-relaxed">
+            Transformamos terrenos áridos en oasis verdes mediante tecnología de hidrosiembra de precisión. Trabajamos en todo el país.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 pt-2">
+            <a class="bg-secondary text-on-secondary px-8 py-4 rounded-lg font-headline font-bold text-center hover:shadow-lg hover:shadow-secondary/20 transition-all"
+              href="#variedades">Ver Variedades</a>
+            <a class="border border-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-lg font-headline font-bold text-center hover:bg-white/10 transition-all"
+              href="#contacto">Solicitar Presupuesto</a>
+          </div>
+        </div>
+        <!-- Right: Feature badges -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-1 gap-4">
+          <div class="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10">
+            <span class="material-symbols-outlined text-secondary text-3xl" data-icon="speed">speed</span>
+            <div>
+              <h3 class="font-headline font-bold text-white text-sm">Crecimiento Veloz</h3>
+              <p class="text-xs text-white/60">Germinación hasta 50% más rápida</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10">
+            <span class="material-symbols-outlined text-secondary text-3xl" data-icon="shield">shield</span>
+            <div>
+              <h3 class="font-headline font-bold text-white text-sm">Protección Total</h3>
+              <p class="text-xs text-white/60">Mulch anti-erosión y anti-aves</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10">
+            <span class="material-symbols-outlined text-secondary text-3xl" data-icon="water_drop">water_drop</span>
+            <div>
+              <h3 class="font-headline font-bold text-white text-sm">Ahorro Hídrico</h3>
+              <p class="text-xs text-white/60">Retiene humedad por más tiempo</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10">
+            <span class="material-symbols-outlined text-secondary text-3xl" data-icon="public">public</span>
+            <div>
+              <h3 class="font-headline font-bold text-white text-sm">Cobertura Nacional</h3>
+              <p class="text-xs text-white/60">Trabajamos en todo Argentina</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Results Gallery -->
+  <section class="py-16 md:py-24 bg-surface-container-low relative overflow-hidden" id="resultados">
+    <div class="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="mb-12 md:mb-16 text-center">
+        <h2 class="text-3xl md:text-4xl font-headline font-extrabold text-primary mb-4">Resultados que Hablan</h2>
+        <p class="text-on-surface-variant max-w-2xl mx-auto">Nuestra técnica garantiza una cobertura uniforme y saludable. Mirá el antes y después de nuestros proyectos.</p>
+      </div>
+
+      <!-- Before / After comparison (reference style) -->
+      <div class="bg-white rounded-3xl shadow-lg border border-outline-variant/10 overflow-hidden mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2">
+          <!-- Before -->
+          <div class="flex flex-col">
+            <div class="relative overflow-hidden border-4 border-[#6B8E23] rounded-2xl m-4 md:m-6">
+              <div class="aspect-[4/5] sm:aspect-[3/4] w-full video-placeholder flex items-center justify-center bg-gradient-to-br from-[#e8e0d0] to-[#d4cbb8] relative">
+                <!-- Placeholder: replace src with actual video/image when available -->
+                <img alt="Antes - Estado inicial"
+                  class="w-full h-full object-cover"
+                  src="" />
+                <!-- Play overlay for future video -->
+                <div class="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 hover:opacity-100 transition-opacity cursor-pointer">
+                  <div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
+                    <span class="material-symbols-outlined text-primary text-3xl" data-icon="play_arrow">play_arrow</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="text-center pb-4 md:pb-6 font-headline font-extrabold text-[#6B8E23] uppercase tracking-[0.2em] text-sm">Antes</p>
+          </div>
+          <!-- After -->
+          <div class="flex flex-col">
+            <div class="relative overflow-hidden border-4 border-[#2E5E3E] rounded-2xl m-4 md:m-6">
+              <div class="aspect-[4/5] sm:aspect-[3/4] w-full video-placeholder flex items-center justify-center bg-gradient-to-br from-[#4a7c59] to-[#2d5a3a] relative">
+                <!-- Placeholder: replace src with actual video/image when available -->
+                <img alt="Después - Césped establecido"
+                  class="w-full h-full object-cover"
+                  src="" />
+                <!-- Play overlay for future video -->
+                <div class="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 hover:opacity-100 transition-opacity cursor-pointer">
+                  <div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
+                    <span class="material-symbols-outlined text-primary text-3xl" data-icon="play_arrow">play_arrow</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="text-center pb-4 md:pb-6 font-headline font-extrabold text-[#2E5E3E] uppercase tracking-[0.2em] text-sm">Después</p>
+          </div>
+        </div>
+        <!-- Caption -->
+        <div class="text-center px-6 pb-6">
+          <p class="text-on-surface-variant text-sm">Proyecto Residencial — Cobertura total en 21 días</p>
+        </div>
+      </div>
+
+      <!-- Social buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <span class="text-on-surface-variant text-sm font-headline">Seguinos en redes:</span>
+        <div class="flex gap-3">
+          <a href="#" target="_blank" rel="noopener noreferrer"
+            class="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-outline-variant/20 hover:border-primary/30 hover:bg-primary/5 transition-all text-on-surface font-headline font-bold text-sm">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            TikTok
+          </a>
+          <a href="#" target="_blank" rel="noopener noreferrer"
+            class="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-outline-variant/20 hover:border-primary/30 hover:bg-primary/5 transition-all text-on-surface font-headline font-bold text-sm">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Varieties Section -->
+  <section class="py-16 md:py-24 bg-surface" id="variedades">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12 md:mb-20">
+        <span class="text-secondary font-label tracking-widest uppercase font-bold text-sm block mb-4">Catálogo Premium</span>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-headline font-extrabold texºt-primary">Nuestras Variedades</h2>
+      </div>
+      <!-- Carousel container -->
+      <div class="relative">
+        <div class="overflow-hidden" id="varieties-carousel">
+          <div class="varieties-track" id="varieties-track">
+            <!-- Bermuda -->
+            <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-3">
+              <a href="https://wa.me/5492915060219?text=Hola%2C%20quiero%20consultar%20sobre%20la%20variedad%20Bermuda"
+                target="_blank" rel="noopener noreferrer"
+                class="block bg-surface-container-low rounded-2xl border border-outline-variant/10 hover:border-secondary/30 hover:shadow-xl transition-all group overflow-hidden">
+                <div class="relative h-48 sm:h-56 overflow-hidden">
+                  <img src="public/BERMUDA.png" alt="Bermuda" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                  <span class="absolute bottom-3 left-3 bg-secondary text-on-secondary px-3 py-1 rounded-full text-xs font-bold">Consultar</span>
+                </div>
+                <div class="p-5">
+                  <h3 class="text-xl font-headline font-extrabold text-primary mb-3">Bermuda</h3>
+                  <div class="space-y-2 mb-5 text-sm">
+                    <div class="flex justify-between border-b border-outline-variant/10 pb-1">
+                      <span class="text-on-surface-variant">Implantación</span><span class="font-bold text-primary">Media</span>
+                    </div>
+                    <div class="flex justify-between border-b border-outline-variant/10 pb-1">
+                      <span class="text-on-surface-variant">Mantenimiento</span><span class="font-bold text-primary">Bajo</span>
+                    </div>
+                    <div class="flex justify-between border-b border-outline-variant/10 pb-1">
+                      <span class="text-on-surface-variant">Resiembra</span><span class="font-bold text-primary">Otoñal</span>
+                    </div>
+                  </div>
+                  <div class="space-y-3">
+                    <div class="space-y-1">
+                      <div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-on-surface-variant"><span>Tránsito</span><span>Muy Alta</span></div>
+                      <div class="h-1.5 bg-outline-variant/30 rounded-full overflow-hidden"><div class="h-full bg-primary w-full rounded-full"></div></div>
+                    </div>
+                    <div class="space-y-1">
+                      <div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-on-surface-variant"><span>Frío</span><span>Baja</span></div>
+                      <div class="h-1.5 bg-outline-variant/30 rounded-full overflow-hidden"><div class="h-full bg-primary w-1/4 rounded-full"></div></div>
+                    </div>
+                    <div class="space-y-1">
+                      <div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-on-surface-variant"><span>Calor</span><span>Muy Alta</span></div>
+                      <div class="h-1.5 bg-outline-variant/30 rounded-full overflow-hidden"><div class="h-full bg-primary w-full rounded-full"></div></div>
+                    </div>
+                    <div class="space-y-1">
+                      <div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-on-surface-variant"><span>Sombra</span><span>Baja</span></div>
+                      <div class="h-1.5 bg-outline-variant/30 rounded-full overflow-hidden"><div class="h-full bg-primary w-1/4 rounded-full"></div></div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <!-- Festuca Alta -->
+            <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-3">
+              <a href="https://wa.me/5492915060219?text=Hola%2C%20quiero%20consultar%20sobre%20la%20variedad%20Festuca%20Alta"
+                target="_blank" rel="noopener noreferrer"
+                class="block bg-surface-container-low rounded-2xl border border-outline-variant/10 hover:border-secondary/30 hover:shadow-xl transition-all group overflow-hidden">
+                <div class="relative h-48 sm:h-56 overflow-hidden">
+                  <img src="public/FESTUCA GRAND PRIX.png" alt="Festuca Alta" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                  <span class="absolute bottom-3 left-3 bg-secondary text-on-secondary px-3 py-1 rounded-full text-xs font-bold">Consultar</span>
+                </div>
+                <div class="p-5">
+                  <h3 class="text-xl font-headline font-extrabold text-primary mb-3">Festuca Alta</h3>
+                  <div class="space-y-2 mb-5 text-sm">
+                    <div class="flex justify-between border-b border-outline-variant/10 pb-1">
+                      <span class="text-on-surface-variant">Implantación</span><span class="font-bold text-primary">Media</span>
+                    </div>
+                    <div class="flex justify-between border-b border-outline-variant/10 pb-1">
+                      <span class="text-on-surface-variant">Mantenimiento</span><span class="font-bold text-primary">Medio</span>
+                    </div>
+                    <div class="flex justify-between border-b border-outline-variant/10 pb-1">
+                      <span class="text-on-surface-variant">Resiembra</span><span class="font-bold text-primary">No req.</span>
+                    </div>
+                  </div>
+                  <div class="space-y-3">
+                    <div class="space-y-1">
+                      <div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-on-surface-variant"><span>Tránsito</span><span>Alta</span></div>
+                      <div class="h-1.5 bg-outline-variant/30 rounded-full overflow-hidden"><div class="h-full bg-primary w-[80%] rounded-full"></div></div>
+                    </div>
+                    <div class="space-y-1">
+                      <div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-on-surface-variant"><span>Frío</span><span>Alta</span></div>
+                      <div class="h-1.5 bg-outline-variant/30 rounded-full overflow-hidden"><div class="h-full bg-primary w-[80%] rounded-full"></div></div>
+                    </div>
+                    <div class="space-y-1">
+                      <div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-on-surface-variant"><span>Calor</span><span>Media</span></div>
+                      <div class="h-1.5 bg-outline-variant/30 rounded-full overflow-hidden"><div class="h-full bg-primary w-1/2 rounded-full"></div></div>
+                    </div>
+                    <div class="space-y-1">
+                      <div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-on-surface-variant"><span>Sombra</span><span>Media</span></div>
+                      <div class="h-1.5 bg-outline-variant/30 rounded-full overflow-hidden"><div class="h-full bg-primary w-1/2 rounded-full"></div></div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <!-- Festuca Rubra -->
+            <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-3">
+              <a href="https://wa.me/5492915060219?text=Hola%2C%20quiero%20consultar%20sobre%20la%20variedad%20Festuca%20Rubra"
+                target="_blank" rel="noopener noreferrer"
+                class="block bg-surface-container-low rounded-2xl border border-outline-variant/10 hover:border-secondary/30 hover:shadow-xl transition-all group overflow-hidden">
+                <div class="relative h-48 sm:h-56 overflow-hidden">
+                  <img src="public/FESTUCA RUBRA.png" alt="Festuca Rubra" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                  <span class="absolute bottom-3 left-3 bg-secondary text-on-secondary px-3 py-1 rounded-full text-xs font-bold">Consultar</span>
+                </div>
+                <div class="p-5">
+                  <h3 class="text-xl font-headline font-extrabold text-primary mb-3">Festuca Rubra</h3>
+                  <div class="space-y-2 mb-5 text-sm">
+                    <div class="flex justify-between border-b border-outline-variant/10 pb-1">
+                      <span class="text-on-surface-variant">Implantación</span><span class="font-bold text-primary">Lenta</span>
+                    </div>
+                    <div class="flex justify-between border-b border-outline-variant/10 pb-1">
+                      <span class="text-on-surface-variant">Mantenimiento</span><span class="font-bold text-primary">Bajo</span>
+                    </div>
+                    <div class="flex justify-between border-b border-outline-variant/10 pb-1">
+                      <span class="text-on-surface-variant">Resiembra</span><span class="font-bold text-primary">Escasa</span>
+                    </div>
+                  </div>
+                  <div class="space-y-3">
+                    <div class="space-y-1">
+                      <div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-on-surface-variant"><span>Tránsito</span><span>Baja</span></div>
+                      <div class="h-1.5 bg-outline-variant/30 rounded-full overflow-hidden"><div class="h-full bg-primary w-1/4 rounded-full"></div></div>
+                    </div>
+                    <div class="space-y-1">
+                      <div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-on-surface-variant"><span>Frío</span><span>Muy Alta</span></div>
+                      <div class="h-1.5 bg-outline-variant/30 rounded-full overflow-hidden"><div class="h-full bg-primary w-full rounded-full"></div></div>
+                    </div>
+                    <div class="space-y-1">
+                      <div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-on-surface-variant"><span>Calor</span><span>Baja</span></div>
+                      <div class="h-1.5 bg-outline-variant/30 rounded-full overflow-hidden"><div class="h-full bg-primary w-1/4 rounded-full"></div></div>
+                    </div>
+                    <div class="space-y-1">
+                      <div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-on-surface-variant"><span>Sombra</span><span>Muy Alta</span></div>
+                      <div class="h-1.5 bg-outline-variant/30 rounded-full overflow-hidden"><div class="h-full bg-primary w-full rounded-full"></div></div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <!-- Poa Pratensis -->
+            <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-3">
+              <a href="https://wa.me/5492915060219?text=Hola%2C%20quiero%20consultar%20sobre%20la%20variedad%20Poa%20Pratensis"
+                target="_blank" rel="noopener noreferrer"
+                class="block bg-surface-container-low rounded-2xl border border-outline-variant/10 hover:border-secondary/30 hover:shadow-xl transition-all group overflow-hidden">
+                <div class="relative h-48 sm:h-56 overflow-hidden">
+                  <img src="public/POA PRATENSIS.png" alt="Poa Pratensis" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                  <span class="absolute bottom-3 left-3 bg-secondary text-on-secondary px-3 py-1 rounded-full text-xs font-bold">Consultar</span>
+                </div>
+                <div class="p-5">
+                  <h3 class="text-xl font-headline font-extrabold text-primary mb-3">Poa Pratensis</h3>
+                  <div class="space-y-2 mb-5 text-sm">
+                    <div class="flex justify-between border-b border-outline-variant/10 pb-1">
+                      <span class="text-on-surface-variant">Implantación</span><span class="font-bold text-primary">Lenta</span>
+                    </div>
+                    <div class="flex justify-between border-b border-outline-variant/10 pb-1">
+                      <span class="text-on-surface-variant">Mantenimiento</span><span class="font-bold text-primary">Medio</span>
+                    </div>
+                    <div class="flex justify-between border-b border-outline-variant/10 pb-1">
+                      <span class="text-on-surface-variant">Resiembra</span><span class="font-bold text-primary">No req.</span>
+                    </div>
+                  </div>
+                  <div class="space-y-3">
+                    <div class="space-y-1">
+                      <div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-on-surface-variant"><span>Tránsito</span><span>Alta</span></div>
+                      <div class="h-1.5 bg-outline-variant/30 rounded-full overflow-hidden"><div class="h-full bg-primary w-[80%] rounded-full"></div></div>
+                    </div>
+                    <div class="space-y-1">
+                      <div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-on-surface-variant"><span>Frío</span><span>Muy Alta</span></div>
+                      <div class="h-1.5 bg-outline-variant/30 rounded-full overflow-hidden"><div class="h-full bg-primary w-full rounded-full"></div></div>
+                    </div>
+                    <div class="space-y-1">
+                      <div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-on-surface-variant"><span>Calor</span><span>Baja</span></div>
+                      <div class="h-1.5 bg-outline-variant/30 rounded-full overflow-hidden"><div class="h-full bg-primary w-1/4 rounded-full"></div></div>
+                    </div>
+                    <div class="space-y-1">
+                      <div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-on-surface-variant"><span>Sombra</span><span>Baja</span></div>
+                      <div class="h-1.5 bg-outline-variant/30 rounded-full overflow-hidden"><div class="h-full bg-primary w-1/4 rounded-full"></div></div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <!-- Rye Grass -->
+            <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-3">
+              <a href="https://wa.me/5492915060219?text=Hola%2C%20quiero%20consultar%20sobre%20la%20variedad%20Rye%20Grass%20Anual"
+                target="_blank" rel="noopener noreferrer"
+                class="block bg-surface-container-low rounded-2xl border border-outline-variant/10 hover:border-secondary/30 hover:shadow-xl transition-all group overflow-hidden">
+                <div class="relative h-48 sm:h-56 overflow-hidden">
+                  <img src="public/RYEGRASS EMINENCE.png" alt="Rye Grass Anual" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                  <span class="absolute bottom-3 left-3 bg-secondary text-on-secondary px-3 py-1 rounded-full text-xs font-bold">Consultar</span>
+                </div>
+                <div class="p-5">
+                  <h3 class="text-xl font-headline font-extrabold text-primary mb-3">Rye Grass Anual</h3>
+                  <div class="space-y-2 mb-5 text-sm">
+                    <div class="flex justify-between border-b border-outline-variant/10 pb-1">
+                      <span class="text-on-surface-variant">Implantación</span><span class="font-bold text-primary">Rápida</span>
+                    </div>
+                    <div class="flex justify-between border-b border-outline-variant/10 pb-1">
+                      <span class="text-on-surface-variant">Mantenimiento</span><span class="font-bold text-primary">Bajo</span>
+                    </div>
+                    <div class="flex justify-between border-b border-outline-variant/10 pb-1">
+                      <span class="text-on-surface-variant">Resiembra</span><span class="font-bold text-primary">Anual</span>
+                    </div>
+                  </div>
+                  <div class="space-y-3">
+                    <div class="space-y-1">
+                      <div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-on-surface-variant"><span>Tránsito</span><span>Media</span></div>
+                      <div class="h-1.5 bg-outline-variant/30 rounded-full overflow-hidden"><div class="h-full bg-primary w-1/2 rounded-full"></div></div>
+                    </div>
+                    <div class="space-y-1">
+                      <div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-on-surface-variant"><span>Frío</span><span>Alta</span></div>
+                      <div class="h-1.5 bg-outline-variant/30 rounded-full overflow-hidden"><div class="h-full bg-primary w-[80%] rounded-full"></div></div>
+                    </div>
+                    <div class="space-y-1">
+                      <div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-on-surface-variant"><span>Calor</span><span>Muy Baja</span></div>
+                      <div class="h-1.5 bg-outline-variant/30 rounded-full overflow-hidden"><div class="h-full bg-primary w-[10%] rounded-full"></div></div>
+                    </div>
+                    <div class="space-y-1">
+                      <div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-on-surface-variant"><span>Sombra</span><span>Media</span></div>
+                      <div class="h-1.5 bg-outline-variant/30 rounded-full overflow-hidden"><div class="h-full bg-primary w-1/2 rounded-full"></div></div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- Carousel arrows -->
+        <button id="carousel-prev" aria-label="Anterior" class="carousel-arrow absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 z-10 w-10 h-10 bg-white shadow-lg rounded-full items-center justify-center hover:bg-primary hover:text-white transition-all border border-outline-variant/20" style="display:none;">
+          <span class="material-symbols-outlined text-xl" data-icon="chevron_left">chevron_left</span>
+        </button>
+        <button id="carousel-next" aria-label="Siguiente" class="carousel-arrow absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 z-10 w-10 h-10 bg-white shadow-lg rounded-full items-center justify-center hover:bg-primary hover:text-white transition-all border border-outline-variant/20" style="display:none;">
+          <span class="material-symbols-outlined text-xl" data-icon="chevron_right">chevron_right</span>
+        </button>
+        <!-- Dots indicator -->
+        <div class="flex justify-center gap-2 mt-8" id="carousel-dots"></div>
+      </div>
+    </div>
+  </section>
+  <!-- FAQ Accordion -->
+  <section class="py-16 md:py-24 bg-surface-container-low" id="faq">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <h2 class="text-3xl md:text-4xl font-headline font-extrabold text-primary text-center mb-12 md:mb-16">Preguntas Frecuentes</h2>
+      <div class="space-y-4">
+        <details class="group bg-white rounded-xl border border-outline-variant/10 overflow-hidden" open="">
+          <summary
+            class="flex justify-between items-center p-6 cursor-pointer list-none font-headline font-bold text-primary">
+            ¿Qué es la hidrosiembra?
+            <span class="material-symbols-outlined group-open:rotate-180 transition-transform"
+              data-icon="expand_more">expand_more</span>
+          </summary>
+          <div class="p-6 pt-0 text-on-surface-variant leading-relaxed">
+            Es un proceso de siembra hidromecánica que utiliza una mezcla de agua, semillas, fertilizantes y "mulch"
+            (fibra de madera o celulosa). Se aplica mediante una manguera de alta presión, permitiendo una distribución
+            uniforme y una germinación acelerada.
+          </div>
+        </details>
+        <details class="group bg-white rounded-xl border border-outline-variant/10 overflow-hidden">
+          <summary
+            class="flex justify-between items-center p-6 cursor-pointer list-none font-headline font-bold text-primary">
+            ¿En cuánto tiempo veré resultados?
+            <span class="material-symbols-outlined group-open:rotate-180 transition-transform"
+              data-icon="expand_more">expand_more</span>
+          </summary>
+          <div class="p-6 pt-0 text-on-surface-variant leading-relaxed">
+            Dependiendo de la variedad elegida y las condiciones climáticas, los primeros brotes aparecen entre los 5 y
+            10 días. Una cobertura densa suele lograrse a los 21-28 días.
+          </div>
+        </details>
+        <details class="group bg-white rounded-xl border border-outline-variant/10 overflow-hidden">
+          <summary
+            class="flex justify-between items-center p-6 cursor-pointer list-none font-headline font-bold text-primary">
+            ¿Llegan a todo el país?
+            <span class="material-symbols-outlined group-open:rotate-180 transition-transform"
+              data-icon="expand_more">expand_more</span>
+          </summary>
+          <div class="p-6 pt-0 text-on-surface-variant leading-relaxed">
+            Sí, tenemos nuestra base técnica en Buenos Aires pero realizamos operativos de hidrosiembra en todo el
+            territorio argentino, desde Tierra del Fuego hasta Jujuy.
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+  <!-- Social & Contact -->
+  <section class="py-16 md:py-24 bg-primary text-white relative" id="contacto">
+    <img alt="Texture" class="absolute inset-0 w-full h-full object-cover opacity-10"
+      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTVaq2eyVtF3J19VGkfNLI5A1rxIclgLZdFbxIx4m8wy3y-_U-EWQ7a8I-qIkasKkQltRUy7BVx8WDnEEqJ0p0lG6l2bl1HSOIHqd2EZTCLjmOHrCmz3MT38QVUOZNTkhkLCCjdG_rWjXWRRDPtzSohxeRpefC-GHFcSqnNtaTS3nLnFywnxiXHdV2lqH7uqIlVf4p159ubtcE5cRLtdtyox4Mw9Xc9t1EeYKRDqEMbM1TuZFV7_g6fG9JLH3c2gTB525qaIZmBVsC" />
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-headline font-extrabold mb-6">Empecemos a construir tu paisaje</h2>
+          <p class="text-surface/70 mb-8 md:mb-12 text-base md:text-lg">Déjanos tus datos y un especialista técnico se pondrá en contacto para presupuestar tu proyecto.</p>
+        
+          <div class="space-y-4 font-label tracking-wide text-sm opacity-80 mb-8">
+            <p class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary"
+                data-icon="location_on">location_on</span> Buenos Aires, Argentina - Alcance Nacional</p>
+            <p class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary"
+                data-icon="mail">mail</span> info@hydrograss.com.ar</p>
+          </div>
+
+          <!-- WhatsApp CTA -->
+          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+            <h3 class="text-xl font-headline font-bold mb-2">¿Preferís WhatsApp?</h3>
+            <p class="text-white/60 text-sm mb-4">Escribinos directamente y te respondemos al instante.</p>
+            <a href="https://wa.me/5492915060219?text=Hola%2C%20quiero%20consultar%20sobre%20hidrosiembra"
+              target="_blank" rel="noopener noreferrer"
+              class="inline-flex items-center gap-3 bg-[#25D366] text-white px-6 py-3 rounded-xl font-headline font-bold hover:bg-[#20bd5a] transition-all w-full justify-center text-center">
+              <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Contactar por WhatsApp
+            </a>
+          </div>
+        </div>
+        <div class="bg-surface p-6 sm:p-8 rounded-2xl shadow-2xl">
+          <form class="space-y-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="space-y-1">
+                <label class="text-xs font-bold text-primary uppercase tracking-widest">Nombre</label>
+                <input
+                  class="w-full bg-transparent border border-outline-variant/40 rounded-lg focus:ring-1 focus:ring-primary focus:border-primary transition-colors text-primary py-3 px-3"
+                  placeholder="Tu nombre" type="text" />
+              </div>
+              <div class="space-y-1">
+                <label class="text-xs font-bold text-primary uppercase tracking-widest">Email</label>
+                <input
+                  class="w-full bg-transparent border border-outline-variant/40 rounded-lg focus:ring-1 focus:ring-primary focus:border-primary transition-colors text-primary py-3 px-3"
+                  placeholder="tu@email.com" type="email" />
+              </div>
+            </div>
+            <div class="space-y-1">
+              <label class="text-xs font-bold text-primary uppercase tracking-widest">Superficie (m2)</label>
+              <input
+                class="w-full bg-transparent border border-outline-variant/40 rounded-lg focus:ring-1 focus:ring-primary focus:border-primary transition-colors text-primary py-3 px-3"
+                placeholder="Ej. 500" type="number" />
+            </div>
+            <!-- Grass type checkboxes -->
+            <div class="space-y-2">
+              <label class="text-xs font-bold text-primary uppercase tracking-widest">Tipo de pasto (opcional)</label>
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                <label class="flex items-center gap-2 text-sm text-on-surface-variant cursor-pointer hover:text-primary transition-colors">
+                  <input type="checkbox" name="grass_type" value="bermuda" class="rounded border-outline-variant/40 text-primary focus:ring-primary" />
+                  Bermuda
+                </label>
+                <label class="flex items-center gap-2 text-sm text-on-surface-variant cursor-pointer hover:text-primary transition-colors">
+                  <input type="checkbox" name="grass_type" value="festuca_alta" class="rounded border-outline-variant/40 text-primary focus:ring-primary" />
+                  Festuca Alta
+                </label>
+                <label class="flex items-center gap-2 text-sm text-on-surface-variant cursor-pointer hover:text-primary transition-colors">
+                  <input type="checkbox" name="grass_type" value="festuca_rubra" class="rounded border-outline-variant/40 text-primary focus:ring-primary" />
+                  Festuca Rubra
+                </label>
+                <label class="flex items-center gap-2 text-sm text-on-surface-variant cursor-pointer hover:text-primary transition-colors">
+                  <input type="checkbox" name="grass_type" value="poa_pratensis" class="rounded border-outline-variant/40 text-primary focus:ring-primary" />
+                  Poa Pratensis
+                </label>
+                <label class="flex items-center gap-2 text-sm text-on-surface-variant cursor-pointer hover:text-primary transition-colors">
+                  <input type="checkbox" name="grass_type" value="rye_grass" class="rounded border-outline-variant/40 text-primary focus:ring-primary" />
+                  Rye Grass
+                </label>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <label class="text-xs font-bold text-primary uppercase tracking-widest">Mensaje</label>
+              <textarea
+                class="w-full bg-transparent border border-outline-variant/40 rounded-lg focus:ring-1 focus:ring-primary focus:border-primary transition-colors text-primary py-3 px-3"
+                placeholder="Contanos qué necesitás..." rows="3"></textarea>
+            </div>
+            <button
+              class="w-full bg-secondary text-on-secondary font-headline font-extrabold py-4 rounded-lg hover:bg-secondary/90 transition-all uppercase tracking-widest text-sm">Enviar
+              Consulta</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer class="bg-[#103314] w-full flex flex-col items-center px-4 sm:px-8 pt-12 pb-6 border-t border-[#274A28]">
+    <div class="max-w-7xl w-full flex flex-col md:flex-row justify-between items-center gap-8 mb-8">
+      <a href="#inicio" class="shrink-0">
+        <img src="public/36 (1)-Photoroom.png" alt="Hydrograss Logo" class="h-12 md:h-14 w-auto" />
+      </a>
+      <!-- Social icons -->
+      <div class="flex items-center gap-4">
+        <a href="#" target="_blank" rel="noopener noreferrer" class="text-[#FCF9F4]/60 hover:text-[#d4a84b] transition-colors" aria-label="Instagram">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="text-[#FCF9F4]/60 hover:text-[#d4a84b] transition-colors" aria-label="TikTok">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+        </a>
+      </div>
+      <div class="flex gap-6 sm:gap-8 font-headline text-sm tracking-wide">
+        <a class="text-[#FCF9F4]/70 hover:text-[#B89352] transition-colors" href="privacidad.html">Privacidad</a>
+        <a class="text-[#FCF9F4]/70 hover:text-[#B89352] transition-colors" href="terminos.html">Términos</a>
+      </div>
+    </div>
+    <div class="text-[#FCF9F4]/40 font-headline text-xs tracking-widest uppercase text-center">
+      © 2026 Hydrograss - The Earth Architect. Todos los derechos reservados.
+    </div>
+  </footer>
+  <!-- Floating WhatsApp CTA -->
+  <a class="fixed bottom-6 right-6 z-[60] bg-[#25D366] text-white w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all group"
+    href="https://wa.me/5492915060219?text=Hola%2C%20quiero%20consultar%20sobre%20hidrosiembra"
+    target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+    <svg class="w-7 h-7 sm:w-8 sm:h-8 fill-current" viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <!-- Tooltip -->
+    <span class="absolute right-full mr-3 bg-white text-primary text-sm font-bold px-3 py-2 rounded-lg shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none hidden sm:block">
+      Chateá con nosotros
+    </span>
+  </a>
+
+  <script>
+    // === Mobile Menu Toggle ===
+    const hamburger = document.getElementById('hamburger-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const ham1 = document.getElementById('ham-1');
+    const ham2 = document.getElementById('ham-2');
+    const ham3 = document.getElementById('ham-3');
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+      if (mobileMenu.classList.contains('open')) {
+        ham1.style.transform = 'rotate(45deg) translate(4px, 4px)';
+        ham2.style.opacity = '0';
+        ham3.style.transform = 'rotate(-45deg) translate(4px, -4px)';
+      } else {
+        ham1.style.transform = '';
+        ham2.style.opacity = '';
+        ham3.style.transform = '';
+      }
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.nav-link-mobile').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        ham1.style.transform = '';
+        ham2.style.opacity = '';
+        ham3.style.transform = '';
+      });
+    });
+
+    // === Active Section Detection (IntersectionObserver) ===
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const mobileLinks = document.querySelectorAll('.nav-link-mobile');
+
+    function setActiveLink(id) {
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('data-section') === id);
+      });
+      mobileLinks.forEach(link => {
+        if (link.getAttribute('data-section') === id) {
+          link.style.color = '#d4a84b';
+        } else {
+          link.style.color = '';
+        }
+      });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveLink(entry.target.id);
+        }
+      });
+    }, { rootMargin: '-30% 0px -70% 0px' });
+
+    sections.forEach(section => observer.observe(section));
+
+    // Click also sets active
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      });
+    });
+
+    // === Varieties Carousel ===
+    const track = document.getElementById('varieties-track');
+    const prevBtn = document.getElementById('carousel-prev');
+    const nextBtn = document.getElementById('carousel-next');
+    const dotsContainer = document.getElementById('carousel-dots');
+    const totalItems = track.children.length; // 5
+    let currentSlide = 1; // Start in the middle
+
+    function getItemsPerView() {
+      if (window.innerWidth >= 1024) return 3;
+      if (window.innerWidth >= 640) return 2;
+      return 1;
+    }
+
+    function getMaxSlide() {
+      return Math.max(0, totalItems - getItemsPerView());
+    }
+
+    function updateCarousel() {
+      const perView = getItemsPerView();
+      const itemWidth = 100 / perView;
+      const maxSlide = getMaxSlide();
+      if (currentSlide > maxSlide) currentSlide = maxSlide;
+      if (currentSlide < 0) currentSlide = 0;
+      track.style.transform = `translateX(-${currentSlide * itemWidth}%)`;
+
+      // Arrow visibility
+      if (maxSlide <= 0) {
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+      } else {
+        prevBtn.style.display = currentSlide <= 0 ? 'none' : 'flex';
+        nextBtn.style.display = currentSlide >= maxSlide ? 'none' : 'flex';
+      }
+      updateDots();
+    }
+
+    function updateDots() {
+      const total = getMaxSlide() + 1;
+      dotsContainer.innerHTML = '';
+      for (let i = 0; i < total; i++) {
+        const dot = document.createElement('button');
+        dot.setAttribute('aria-label', `Slide ${i + 1}`);
+        dot.className = `w-2.5 h-2.5 rounded-full transition-all ${i === currentSlide ? 'bg-primary w-8' : 'bg-outline-variant/40 hover:bg-outline-variant/60'}`;
+        dot.addEventListener('click', () => { currentSlide = i; updateCarousel(); });
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (currentSlide > 0) { currentSlide--; updateCarousel(); }
+    });
+    nextBtn.addEventListener('click', () => {
+      if (currentSlide < getMaxSlide()) { currentSlide++; updateCarousel(); }
+    });
+
+    // Touch swipe support — improved for mobile
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let isSwiping = false;
+    const carousel = document.getElementById('varieties-carousel');
+
+    carousel.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      isSwiping = false;
+    }, { passive: true });
+
+    carousel.addEventListener('touchmove', (e) => {
+      if (!touchStartX) return;
+      const diffX = Math.abs(e.touches[0].clientX - touchStartX);
+      const diffY = Math.abs(e.touches[0].clientY - touchStartY);
+      // If horizontal movement is dominant, prevent vertical scroll
+      if (diffX > diffY && diffX > 10) {
+        isSwiping = true;
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    carousel.addEventListener('touchend', (e) => {
+      if (!isSwiping) return;
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) {
+        if (diff > 0 && currentSlide < getMaxSlide()) currentSlide++;
+        else if (diff < 0 && currentSlide > 0) currentSlide--;
+        updateCarousel();
+      }
+      touchStartX = 0;
+      touchStartY = 0;
+      isSwiping = false;
+    }, { passive: true });
+
+    window.addEventListener('resize', () => { updateCarousel(); });
+    updateCarousel();
+  </script>
+</body>
+
+</html>
