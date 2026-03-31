@@ -5,14 +5,16 @@
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Hydrograss | The Earth Architect</title>
+  <title>HydroGrass</title>
+  <link rel="icon" type="image/png" href="public/36 (1)-Photoroom.png" />
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link
     href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;600;700;800&amp;family=Work+Sans:wght@300;400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
     rel="stylesheet" />
+  
   <link
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-    rel="stylesheet" />
+    rel="stylesheet" />º
   <script id="tailwind-config">
     tailwind.config = {
       darkMode: "class",
@@ -185,16 +187,21 @@
   </header>
   <!-- Hero Section -->
   <section class="relative min-h-[80vh] flex items-center overflow-hidden pt-20" id="inicio">
-    <div class="absolute inset-0 bg-gradient-to-br from-primary to-primary-container z-0"></div>
-    <img alt="Background" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-40 grayscale"
-      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxvPoxNpqQj_7Pj3JoWGGk9YXFb0iIYkoKBK0NJcSwjmSEysEQwOtOTE6otNFuMlTNncjqlZ-ckbhjs6zRZPXtUu5rL1h3aNfJ9U8ufF82ITVARWxq41w-TJqayBUgjZIOfG3d6wgwMh70OI36HXH2ctaN3Wq6rosK2ty_XAvOyTsypUeAHTpaK-_5ZZpCZzyFcWKuV_eOouNI0JSPr3TsKKne3BGYl7dGOEfU-ZM3gv8rDSpR2WF2khDu-HFctWggvorBxRTtalJa" />
+    <!-- Grass background image -->
+    <img alt="Background pasto" class="absolute inset-0 w-full h-full object-cover"
+      src="public/green-grass-close-up.webp" />
+    
+    <!-- Dark overlay on top part -->
+    <div class="absolute inset-0 z-0 bg-gradient-to-b from-black/70 via-black/40 to-black/0"></div>
+    
+    <!-- White fade from bottom (starts around 25% from top) -->
+    <!-- Smooth fade from bottom to #F6F3EE -->
+<!-- Smooth fade from bottom to #F6F3EE -->
+<div class="absolute inset-0 z-0 bg-gradient-to-t from-[#F6F3EE] from-[0%] via-[#F6F3EE]/40 via-[22%] via-[#F6F3EE]/10 via-[35%] to-transparent"></div>     
     <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 py-12 md:py-16">
       <div class="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
         <!-- Left: Text -->
         <div class="text-white space-y-6">
-          <div class="inline-block px-4 py-1 border border-secondary/40 rounded-full bg-secondary/10">
-            <span class="text-secondary font-label text-xs uppercase tracking-[0.2em] font-semibold">The Earth Architect</span>
-          </div>
           <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-headline font-extrabold leading-tight tracking-tighter">
             La forma más rápida y eficiente de tener tu césped perfecto.
           </h1>
@@ -244,8 +251,7 @@
   </section>
   <!-- Results Gallery -->
   <section class="py-16 md:py-24 bg-surface-container-low relative overflow-hidden" id="resultados">
-    <div class="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+<div class="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full translate-x-1/2 blur-3xl"></div>    <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="mb-12 md:mb-16 text-center">
         <h2 class="text-3xl md:text-4xl font-headline font-extrabold text-primary mb-4">Resultados que Hablan</h2>
         <p class="text-on-surface-variant max-w-2xl mx-auto">Nuestra técnica garantiza una cobertura uniforme y saludable. Mirá el antes y después de nuestros proyectos.</p>
@@ -635,7 +641,8 @@
           </div>
         </div>
         <div class="bg-surface p-6 sm:p-8 rounded-2xl shadow-2xl">
-          <form class="space-y-5">
+          <form class="space-y-5" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div class="space-y-1">
                 <label class="text-xs font-bold text-primary uppercase tracking-widest">Nombre</label>
