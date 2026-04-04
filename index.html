@@ -14,7 +14,7 @@
   
   <link
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-    rel="stylesheet" />º
+    rel="stylesheet" />
   <script id="tailwind-config">
     tailwind.config = {
       darkMode: "class",
@@ -89,19 +89,22 @@
       opacity: 0.03;
     }
 
+    /* === Navbar === */
     .nav-link {
       position: relative;
-      padding-bottom: 4px;
+      padding-bottom: 3px;
     }
     .nav-link::after {
       content: '';
       position: absolute;
       bottom: 0;
-      left: 0;
+      left: 50%;
+      transform: translateX(-50%);
       width: 0;
-      height: 2px;
+      height: 1.5px;
       background: #d4a84b;
-      transition: width 0.3s ease;
+      transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      border-radius: 99px;
     }
     .nav-link:hover::after,
     .nav-link.active::after {
@@ -111,21 +114,47 @@
       color: #d4a84b !important;
     }
 
+    /* Glassmorphic navbar */
+    #main-header {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      background: linear-gradient(to bottom, rgba(12,28,8,0.55) 0%, transparent 100%);
+    }
+    #main-header.scrolled {
+      background: transparent;
+    }
+    #main-header.scrolled nav {
+      background: rgba(18, 38, 10, 0.88);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 8px 32px -8px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.07);
+    }
+    #main-header nav {
+      background: rgba(18, 38, 10, 0.0);
+      border: 1px solid rgba(255,255,255,0);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      border-radius: 9999px;
+    }
+
+    /* Mobile menu pill */
+    #mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+      opacity: 0;
+    }
+    #mobile-menu.open {
+      max-height: 420px;
+      opacity: 1;
+    }
+
     /* Carousel */
     .varieties-track {
       display: flex;
       transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Mobile menu */
-    #mobile-menu {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-    #mobile-menu.open {
-      max-height: 400px;
-    }
+
 
     /* Animation classes */
     .stat-fill {
@@ -148,45 +177,47 @@
 
 <body class="bg-surface font-body text-on-surface selection:bg-secondary/30">
   <!-- TopNavBar -->
-  <header id="main-header" class="fixed top-0 w-full z-50 bg-[#1a3a0e] shadow-lg transition-all duration-300">
-    <nav class="flex justify-between items-center w-full px-4 sm:px-6 py-3 max-w-7xl mx-auto">
+  <header id="main-header" class="fixed top-0 left-0 right-0 z-50 flex flex-col items-center px-4 pointer-events-none">
+    <!-- Desktop + Tablet: floating pill -->
+    <nav class="w-full max-w-5xl px-4 sm:px-6 py-3 mt-3 flex justify-between items-center pointer-events-auto">
       <!-- Logo -->
       <a href="#inicio" class="flex items-center gap-2 shrink-0">
-        <img src="public/36 (1)-Photoroom.png" alt="Hydrograss Logo" class="h-10 sm:h-12 w-auto" />
+        <img src="public/36 (1)-Photoroom.png" alt="Hydrograss Logo" class="h-10 sm:h-11 w-auto drop-shadow-md" />
       </a>
       <!-- Desktop Nav -->
-      <div class="hidden md:flex items-center space-x-6 lg:space-x-8 font-headline font-bold tracking-tight text-sm lg:text-base">
-        <a class="nav-link text-[#f0ead2] hover:text-[#d4a84b] transition-colors active" href="#inicio" data-section="inicio">Inicio</a>
-        <a class="nav-link text-[#f0ead2] hover:text-[#d4a84b] transition-colors" href="#resultados" data-section="resultados">Resultados</a>
-        <a class="nav-link text-[#f0ead2] hover:text-[#d4a84b] transition-colors" href="#variedades" data-section="variedades">Variedades</a>
-        <a class="nav-link text-[#f0ead2] hover:text-[#d4a84b] transition-colors" href="#faq" data-section="faq">FAQ</a>
-        <a class="nav-link text-[#f0ead2] hover:text-[#d4a84b] transition-colors" href="#contacto" data-section="contacto">Contacto</a>
+      <div class="hidden md:flex items-center gap-7 font-headline font-semibold tracking-tight text-sm">
+        <a class="nav-link text-[#f0ead2]/90 hover:text-[#d4a84b] transition-colors duration-200 active" href="#inicio" data-section="inicio">Inicio</a>
+        <a class="nav-link text-[#f0ead2]/90 hover:text-[#d4a84b] transition-colors duration-200" href="#resultados" data-section="resultados">Resultados</a>
+        <a class="nav-link text-[#f0ead2]/90 hover:text-[#d4a84b] transition-colors duration-200" href="#variedades" data-section="variedades">Variedades</a>
+        <a class="nav-link text-[#f0ead2]/90 hover:text-[#d4a84b] transition-colors duration-200" href="#faq" data-section="faq">FAQ</a>
+        <a class="nav-link text-[#f0ead2]/90 hover:text-[#d4a84b] transition-colors duration-200" href="#contacto" data-section="contacto">Contacto</a>
       </div>
       <!-- CTA + Hamburger -->
       <div class="flex items-center gap-3">
-        <a href="https://wa.me/5492915060219?text=Hola%2C%20quiero%20consultar%20sobre%20hidrosiembra"
-          class="hidden sm:inline-flex bg-[#d4a84b] text-[#1a3a0e] px-5 py-2 rounded-lg font-headline font-bold hover:bg-[#c49a3d] active:scale-95 transition-all text-sm">
+        <a href="#contacto"
+          class="hidden sm:inline-flex bg-[#d4a84b] text-[#1a3a0e] px-5 py-2.5 rounded-full font-headline font-bold hover:bg-[#c49a3d] active:scale-95 transition-all text-sm shadow-md shadow-[#d4a84b]/20">
           Consultar
         </a>
-        <!-- Hamburger button -->
-        <button id="hamburger-btn" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Menú">
-          <span class="block w-6 h-0.5 bg-[#f0ead2] transition-all" id="ham-1"></span>
-          <span class="block w-6 h-0.5 bg-[#f0ead2] transition-all" id="ham-2"></span>
-          <span class="block w-6 h-0.5 bg-[#f0ead2] transition-all" id="ham-3"></span>
+        <!-- Hamburger -->
+        <button id="hamburger-btn" class="md:hidden flex flex-col gap-[5px] p-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm" aria-label="Menú">
+          <span class="block w-5 h-[1.5px] bg-[#f0ead2] transition-all origin-center" id="ham-1"></span>
+          <span class="block w-5 h-[1.5px] bg-[#f0ead2] transition-all" id="ham-2"></span>
+          <span class="block w-5 h-[1.5px] bg-[#f0ead2] transition-all origin-center" id="ham-3"></span>
         </button>
       </div>
     </nav>
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="md:hidden bg-[#1a3a0e] border-t border-white/10">
-      <div class="flex flex-col px-6 py-4 space-y-4 font-headline font-bold">
-        <a class="nav-link-mobile text-[#f0ead2] hover:text-[#d4a84b] transition-colors py-2" href="#inicio" data-section="inicio">Inicio</a>
-        <a class="nav-link-mobile text-[#f0ead2] hover:text-[#d4a84b] transition-colors py-2" href="#resultados" data-section="resultados">Resultados</a>
-        <a class="nav-link-mobile text-[#f0ead2] hover:text-[#d4a84b] transition-colors py-2" href="#variedades" data-section="variedades">Variedades</a>
-        <a class="nav-link-mobile text-[#f0ead2] hover:text-[#d4a84b] transition-colors py-2" href="#faq" data-section="faq">FAQ</a>
-        <a class="nav-link-mobile text-[#f0ead2] hover:text-[#d4a84b] transition-colors py-2" href="#contacto" data-section="contacto">Contacto</a>
-        <a href="https://wa.me/5492915060219?text=Hola%2C%20quiero%20consultar%20sobre%20hidrosiembra"
-          class="bg-[#d4a84b] text-[#1a3a0e] px-5 py-3 rounded-lg font-headline font-bold text-center hover:bg-[#c49a3d] transition-all">
-          Consultar por WhatsApp
+
+    <!-- Mobile Menu: drops below the pill -->
+    <div id="mobile-menu" class="md:hidden w-full max-w-5xl pointer-events-auto">
+      <div class="mx-0 mt-2 rounded-2xl bg-[#122610]/92 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/30 flex flex-col px-6 py-5 space-y-1 font-headline font-semibold">
+        <a class="nav-link-mobile text-[#f0ead2]/90 hover:text-[#d4a84b] transition-colors py-2.5 text-sm border-b border-white/5" href="#inicio" data-section="inicio">Inicio</a>
+        <a class="nav-link-mobile text-[#f0ead2]/90 hover:text-[#d4a84b] transition-colors py-2.5 text-sm border-b border-white/5" href="#resultados" data-section="resultados">Resultados</a>
+        <a class="nav-link-mobile text-[#f0ead2]/90 hover:text-[#d4a84b] transition-colors py-2.5 text-sm border-b border-white/5" href="#variedades" data-section="variedades">Variedades</a>
+        <a class="nav-link-mobile text-[#f0ead2]/90 hover:text-[#d4a84b] transition-colors py-2.5 text-sm border-b border-white/5" href="#faq" data-section="faq">FAQ</a>
+        <a class="nav-link-mobile text-[#f0ead2]/90 hover:text-[#d4a84b] transition-colors py-2.5 text-sm" href="#contacto" data-section="contacto">Contacto</a>
+        <a href="#contacto"
+          class="mt-3 bg-[#d4a84b] text-[#1a3a0e] px-5 py-3 rounded-full font-headline font-bold text-center hover:bg-[#c49a3d] transition-all shadow-md shadow-[#d4a84b]/20 text-sm">
+          Consultar
         </a>
       </div>
     </div>
@@ -203,7 +234,7 @@
     <!-- White fade from bottom (starts around 25% from top) -->
     <!-- Smooth fade from bottom to #F6F3EE -->
 <!-- Smooth fade from bottom to #F6F3EE -->
-<div class="absolute inset-0 z-0 bg-gradient-to-t from-[#F6F3EE] from-[0%] via-[#F6F3EE]/40 via-[22%] via-[#F6F3EE]/10 via-[35%] to-transparent"></div>     
+    
     <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 py-12 md:py-16">
       <div class="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
         <!-- Left: Text -->
@@ -212,7 +243,7 @@
             La forma más rápida y eficiente de tener tu césped perfecto.
           </h1>
           <p class="text-lg sm:text-xl text-white/80 max-w-xl leading-relaxed">
-            Transformamos terrenos áridos en oasis verdes mediante tecnología de hidrosiembra de precisión. Trabajamos en todo el país.
+            La mejor solución para áreas grandes, control de erosión en taludes y recuperación de áreas degradadas.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 pt-2">
             <a class="bg-secondary text-on-secondary px-8 py-4 rounded-lg font-headline font-bold text-center hover:shadow-lg hover:shadow-secondary/20 transition-all"
@@ -223,35 +254,42 @@
         </div>
         <!-- Right: Feature badges -->
         <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-1 gap-4">
-          <div class="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10">
-            <span class="material-symbols-outlined text-secondary text-3xl" data-icon="speed">speed</span>
-            <div>
-              <h3 class="font-headline font-bold text-white text-sm">Crecimiento Veloz</h3>
-              <p class="text-xs text-white/60">Germinación hasta 50% más rápida</p>
-            </div>
-          </div>
-          <div class="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10">
-            <span class="material-symbols-outlined text-secondary text-3xl" data-icon="shield">shield</span>
-            <div>
-              <h3 class="font-headline font-bold text-white text-sm">Protección Total</h3>
-              <p class="text-xs text-white/60">Mulch anti-erosión y anti-aves</p>
-            </div>
-          </div>
-          <div class="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10">
-            <span class="material-symbols-outlined text-secondary text-3xl" data-icon="water_drop">water_drop</span>
-            <div>
-              <h3 class="font-headline font-bold text-white text-sm">Ahorro Hídrico</h3>
-              <p class="text-xs text-white/60">Retiene humedad por más tiempo</p>
-            </div>
-          </div>
-          <div class="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10">
-            <span class="material-symbols-outlined text-secondary text-3xl" data-icon="public">public</span>
-            <div>
-              <h3 class="font-headline font-bold text-white text-sm">Cobertura Nacional</h3>
-              <p class="text-xs text-white/60">Trabajamos en todo Argentina</p>
-            </div>
-          </div>
-        </div>
+  <!-- 1: Primeros brotes -->
+  <div class="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10 hover:bg-white/20 hover:border-white/25 hover:-translate-y-0.5 transition-all duration-300 cursor-default">
+    <span class="material-symbols-outlined text-secondary text-3xl" data-icon="speed">speed</span>
+    <div>
+      <h3 class="font-headline font-bold text-white text-sm">Resultados Visibles</h3>
+      <p class="text-xs text-white/60">Entre 7 y 12 días podés ver los primeros brotes</p>
+    </div>
+  </div>
+
+  <!-- 2: Protección de la semilla -->
+  <div class="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10 hover:bg-white/20 hover:border-white/25 hover:-translate-y-0.5 transition-all duration-300 cursor-default">
+    <span class="material-symbols-outlined text-secondary text-3xl" data-icon="shield">shield</span>
+    <div>
+      <h3 class="font-headline font-bold text-white text-sm">Protección Integral</h3>
+      <p class="text-xs text-white/60">Nuestro mulch protege la semilla del viento, mantiene la humedad y la protege de aves</p>
+    </div>
+  </div>
+
+  <!-- 3: Germinación rápida -->
+  <div class="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10 hover:bg-white/20 hover:border-white/25 hover:-translate-y-0.5 transition-all duration-300 cursor-default">
+    <span class="material-symbols-outlined text-secondary text-3xl" data-icon="water_drop">water_drop</span>
+    <div>
+      <h3 class="font-headline font-bold text-white text-sm">Máxima Eficiencia</h3>
+      <p class="text-xs text-white/60">Germiná más rápido gracias a nuestro mulch de alta calidad</p>
+    </div>
+  </div>
+
+  <!-- 4: Cobertura Nacional (Sin cambios) -->
+  <div class="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10 hover:bg-white/20 hover:border-white/25 hover:-translate-y-0.5 transition-all duration-300 cursor-default">
+    <span class="material-symbols-outlined text-secondary text-3xl" data-icon="public">public</span>
+    <div>
+      <h3 class="font-headline font-bold text-white text-sm">Cobertura Nacional</h3>
+      <p class="text-xs text-white/60">Trabajamos en todo Argentina</p>
+    </div>
+  </div>
+</div>
       </div>
     </div>
   </section>
@@ -313,12 +351,12 @@
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <span class="text-on-surface-variant text-sm font-headline">Seguinos en redes:</span>
         <div class="flex gap-3">
-          <a href="#" target="_blank" rel="noopener noreferrer"
+          <a href="https://www.tiktok.com/@hydrograss target="_blank" rel="noopener noreferrer"
             class="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-outline-variant/20 hover:border-primary/30 hover:bg-primary/5 transition-all text-on-surface font-headline font-bold text-sm">
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
             TikTok
           </a>
-          <a href="#" target="_blank" rel="noopener noreferrer"
+          <a href="https://www.instagram.com/hydrograss_hidrosiembra/" target="_blank" rel="noopener noreferrer"
             class="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-outline-variant/20 hover:border-primary/30 hover:bg-primary/5 transition-all text-on-surface font-headline font-bold text-sm">
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
             Instagram
@@ -747,6 +785,16 @@
   </a>
 
   <script>
+    // === Navbar scroll glass effect ===
+    const mainHeader = document.getElementById('main-header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        mainHeader.classList.add('scrolled');
+      } else {
+        mainHeader.classList.remove('scrolled');
+      }
+    }, { passive: true });
+
     // === Mobile Menu Toggle ===
     const hamburger = document.getElementById('hamburger-btn');
     const mobileMenu = document.getElementById('mobile-menu');
