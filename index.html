@@ -113,7 +113,8 @@
       width: 100%;
     }
 
-    .nav-link.active {
+    .nav-link.active,
+    .nav-link-mobile.active {
       color: #d4a84b !important;
     }
 
@@ -230,7 +231,7 @@
     <!-- Mobile Menu: drops below the pill -->
     <div id="mobile-menu" class="md:hidden w-full max-w-5xl pointer-events-auto">
       <div
-        class="mx-0 mt-2 rounded-2xl bg-[#122610]/92 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/30 flex flex-col px-6 py-5 space-y-1 font-headline font-semibold">
+        class="mx-0 mt-2 rounded-2xl bg-[#122610] border border-white/10 shadow-2xl shadow-black/30 flex flex-col px-6 py-5 space-y-1 font-headline font-semibold">
         <a class="nav-link-mobile text-[#f0ead2]/90 hover:text-[#d4a84b] transition-colors py-2.5 text-sm border-b border-white/5"
           href="#inicio" data-section="inicio">Inicio</a>
         <a class="nav-link-mobile text-[#f0ead2]/90 hover:text-[#d4a84b] transition-colors py-2.5 text-sm border-b border-white/5"
@@ -1080,11 +1081,7 @@
         link.classList.toggle('active', link.getAttribute('data-section') === id);
       });
       mobileLinks.forEach(link => {
-        if (link.getAttribute('data-section') === id) {
-          link.style.color = '#d4a84b';
-        } else {
-          link.style.color = '';
-        }
+        link.classList.toggle('active', link.getAttribute('data-section') === id);
       });
     }
 
@@ -1094,7 +1091,7 @@
           setActiveLink(entry.target.id);
         }
       });
-    }, { rootMargin: '-30% 0px -70% 0px' });
+    }, { rootMargin: '-20% 0px -60% 0px' });
 
     sections.forEach(section => observer.observe(section));
 
